@@ -7,7 +7,7 @@ terraform {
 }
 
 provider "aws" {
-  region  = "us-west-2"
+  region  = var.aws_region
 }
 
 data "aws_availability_zones" "available" {
@@ -18,7 +18,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.64.0"
 
-  cidr = "10.0.0.0/16"
+  cidr = var.vpc_cidr_block
 
   azs             = data.aws_availability_zones.available.names
   private_subnets = ["10.0.101.0/24", "10.0.102.0/24"]
